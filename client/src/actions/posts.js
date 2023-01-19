@@ -36,3 +36,26 @@ export const updatePost = (id, updatedPost) => async(dispatch)=>{
         console.log(error);
     }
 }
+
+export const deletePost = (id)=>async(dispatch)=>{
+    try {
+        await api.deletePost(id);
+        dispatch({type: 'DELETE', payload:id});
+    } catch (error) {
+        console.log("Error while deleting record...");
+        console.log(error.message);
+        
+    }
+}
+
+export const likePost = (id)=>async(dispatch)=>{
+    try {
+        const { data } = await api.likePost(id);
+        
+        dispatch({type:'LIKE', payload:data});
+
+    } catch (error) {
+        console.log("Error while updating like count...");
+        console.log(error.message);
+    }
+}
