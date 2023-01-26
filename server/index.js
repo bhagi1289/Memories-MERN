@@ -10,24 +10,22 @@ const app = express();
 dotenv.config();
 
 
-app.use(bodyParser.json({limit:'30mb', extended:true}));
-app.use(bodyParser.urlencoded({limit:'30mb', extended:true}));
+app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors())
 
 const PORT = process.env.PORT || 5000;
 
 app.use('/posts', postRoutes);
-mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology:true })
-.then(()=>{
-    app.listen(PORT, ()=>console.log(`Server running on port: ${PORT}`));
-})
-.catch(err=>{
+mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+    })
+    .catch(err => {
 
-    console.log("Error while connecting to DB........")
-    console.log(err.message);
-});
+        console.log("Error while connecting to DB........")
+        console.log(err.message);
+    });
 
 mongoose.set('strictQuery', true);
-
-
 
